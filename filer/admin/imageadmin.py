@@ -1,5 +1,6 @@
 from django import forms
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
+from django.template.response import TemplateResponse
 from django.urls import path
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
@@ -96,7 +97,7 @@ class ImageAdmin(FileAdmin):
 
     def expand_view(self, request, file_id):
         image = get_object_or_404(self.model, pk=file_id)
-        return render(request, "admin/filer/image/expand.html", context={
+        return TemplateResponse(request, "admin/filer/image/expand.html", context={
             "original_url": image.url
         })
 
